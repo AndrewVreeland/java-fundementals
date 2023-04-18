@@ -58,14 +58,14 @@ public class Main {
 
     int numOfFlips = 0;
     int numOfHeads = 0;
-    double placeHolder = 0.5;
+    double middle = 0.5;
     String result = "";
     while (numOfHeads != n) {
       double coinFlip = random.nextDouble(); // Generate a new random value for each flip
-      numOfFlips = coinFlip < placeHolder ? numOfFlips + 1 : numOfFlips;
-      System.out.println(coinFlip < placeHolder ? "Tails" : "Heads");
+      numOfFlips = coinFlip < middle ? numOfFlips + 1 : numOfFlips;
+      System.out.println(coinFlip < middle ? "Tails" : "Heads");
 
-      numOfHeads = coinFlip > placeHolder ? numOfHeads + 1 : 0;
+      numOfHeads = coinFlip > middle ? numOfHeads + 1 : 0;
       result = Integer.toString(numOfFlips); // Store the number of flips in result variable
     }
     return result; // Return the number of flips as a string
