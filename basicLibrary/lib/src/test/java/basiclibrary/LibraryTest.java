@@ -4,7 +4,12 @@
 package basiclibrary;
 
 
+import com.google.common.io.BaseEncoding;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+
+import static basiclibrary.Library.temp;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
@@ -31,4 +36,40 @@ class LibraryTest {
         int[] rolls3 = diceRoller.roll(n3);
         assertEquals(n3, rolls3.length, "Expected length of rolls3 array to be " + n3);
     }
+
+
+    // Define the test method for the temp() method
+    @Test
+    void testTemp() {
+        // Test data
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+        int min = weeklyMonthTemperatures[0][0];
+        int max = weeklyMonthTemperatures[0][0];
+        HashSet<Integer> diffTemps = new HashSet<>();
+
+        // Invoke the temp() method from the Temp class
+        StringBuilder sb = Library.temp();
+
+        // Assertions
+        // Check if the minimum temperature is calculated correctly
+        assertEquals(52, min, "Expected minimum temperature does not match");
+
+        // Check if the maximum temperature is calculated correctly
+        assertEquals(72, max, "Expected maximum temperature does not match");
+
+        // Check if all temperatures in the expected range are found in the diffTemps hash set
+        for (int i = 52; i <= 72; i++) {
+            assertTrue(diffTemps.contains(i), "Expected temperature " + i + " not found");
+        }
+
+        // Check if the StringBuilder sb contains the expected output for temperatures not found
+        String expectedOutput = "Never saw temperature: 63\n";
+        assertTrue(sb.toString().contains(expectedOutput), "Expected output for missing temperature not found");
+    }
+
 }
