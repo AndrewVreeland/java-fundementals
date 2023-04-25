@@ -19,11 +19,16 @@ public class Library {
         votes.add("Bush");
         votes.add("Hedge");
         votes.add("Bush");
-
+        int[][] weeklyMonthTemperatures = {
+            {66, 64, 58, 65, 71, 57, 60},
+            {57, 65, 65, 70, 72, 65, 51},
+            {55, 54, 60, 53, 59, 57, 61},
+            {65, 56, 55, 52, 55, 62, 57}
+   };
 
         // Calling our Roll Function
         roll(2);
-        temp();
+        temp(weeklyMonthTemperatures);
 
     }
     public boolean someLibraryMethod() {
@@ -33,15 +38,15 @@ public class Library {
     // this will Tally how many votes there are and return the user with the most votes.
 
 
-public static  StringBuilder temp(){
+public static  StringBuilder temp(int[][] weeklyMonthTemperatures){
 
 
-    int[][] weeklyMonthTemperatures = {
-            {66, 64, 58, 65, 71, 57, 60},
-            {57, 65, 65, 70, 72, 65, 51},
-            {55, 54, 60, 53, 59, 57, 61},
-            {65, 56, 55, 52, 55, 62, 57}
-    };
+//    int[][] weeklyMonthTemperatures = {
+//            {66, 64, 58, 65, 71, 57, 60},
+//            {57, 65, 65, 70, 72, 65, 51},
+//            {55, 54, 60, 53, 59, 57, 61},
+//            {65, 56, 55, 52, 55, 62, 57}
+//    };
     int min = weeklyMonthTemperatures[0][0];                            //first index of import hash
     int max = weeklyMonthTemperatures[0][0];                            //first index of import hash
     HashSet<Integer> diffTemps = new HashSet<>();
@@ -60,38 +65,40 @@ public static  StringBuilder temp(){
 
 
     StringBuilder sb = new StringBuilder();
+    sb.append("High: " + max + "\n" );
+    sb.append("Low: " + min + "\n");
     for (int i = min; i <= max; i++) {
         if (!diffTemps.contains(i)) {
             sb.append("Never saw temperature: ").append(i).append("\n");
         }
     }
 
-    //print the resultsS
-    System.out.println("High: " + max);
-    System.out.println("Low: " + min);
+    //print the results
+//    System.out.println("High: " + max);
+//    System.out.println("Low: " + min);
     System.out.println(sb.toString());
 
     return sb;
 
 }
 
-public static String tally(List<String> votes){
-        HashMap<String, Integer> voteCounts = new HashMap<>();
-
-        for (String vote: votes){
-            if (voteCounts.containsKey(vote)) {
-                voteCounts.put(vote, voteCounts.get(vote)+1);
-            }else{
-                voteCounts.put(vote, 1);
-            }idea .
-        }
-        String winner = null;
-        int maxVotes = 0;
-        for(Map.Entry<String, Integer> entry : voteCounts.entrySet()){
-            String plant = entry.getKey();
-            int voteCount
-        }
-}
+//public static String tally(List<String> votes){
+//        HashMap<String, Integer> voteCounts = new HashMap<>();
+//
+//        for (String vote: votes){
+//            if (voteCounts.containsKey(vote)) {
+//                voteCounts.put(vote, voteCounts.get(vote)+1);
+//            }else{
+//                voteCounts.put(vote, 1);
+//            }idea .
+//        }
+//        String winner = null;
+//        int maxVotes = 0;
+//        for(Map.Entry<String, Integer> entry : voteCounts.entrySet()){
+//            String plant = entry.getKey();
+//            int voteCount
+//        }
+//}
     public static int[] roll(int n) {
         /*
         Roll a six-sided dice n times and return an array containing the values of the rolls.
