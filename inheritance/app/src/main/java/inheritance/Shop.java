@@ -2,13 +2,10 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Shop {
+public class Shop extends Establishment {
     // properties
     protected int dollarSigns;
-    protected String name;
     protected String description;
-    protected ArrayList<Review> reviews;
-
 
     //constructor
     public Shop(String name, String description, int dollarSigns) {

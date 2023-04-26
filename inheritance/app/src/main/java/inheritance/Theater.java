@@ -2,14 +2,11 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Theater {
+public class Theater extends Establishment {
     // properties
-    protected String name;
-
     protected ArrayList<String> movies;
-    protected ArrayList<Review> reviews;
-
     //constructor
+
     public Theater(String name, ArrayList<String> movies) {
         this.name = name;
         this.movies = movies;
@@ -17,6 +14,14 @@ public class Theater {
     }
 
     //Methods
+    @Override
+    public String toString() {
+        return "Theater{" +
+                "name='" + name + '\'' +
+                ", movies=" + movies +
+                ", reviews=" + reviews +
+                '}';
+    }
 
     public void addMovie(String movieName){
         movies.add(movieName);

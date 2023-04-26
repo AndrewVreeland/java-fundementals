@@ -2,31 +2,26 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Restaurant {
-    protected String name;
-    protected int stars;
+public class Restaurant extends Establishment {
     protected int dollarSigns;
-    protected ArrayList<Review> reviews;
-
-
     // constructor
 
 
-    public Restaurant(String name, int stars, int dollarSigns) {
+    public Restaurant(String name, float stars, int dollarSigns) {
         this.name = name;
         setStars(stars);
         this.reviews = new ArrayList<>();
         this.dollarSigns = dollarSigns;
     }
     // methods
-
-
     // not sure how to test this
-
-    public void addReview(String author, String body, int stars){
+    public void addReview(String author, String body, float stars){
         Review newReview = new Review(author, body, stars);
         reviews.add(newReview);
     }
+
+
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -40,7 +35,7 @@ public class Restaurant {
 
     //getter and setter
 
-    public void setStars(int stars) {
+    public void setStars(float stars) {
         if (stars >= 0 && stars <= 5) {
             this.stars = stars;
         } else {
@@ -57,7 +52,7 @@ public class Restaurant {
         this.name = name;
     }
 
-    public int getStars() {
+    public float getStars() {
         return stars;
     }
 
