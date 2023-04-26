@@ -16,22 +16,44 @@ class AppTest {
     @Test void RestaurantConstructorWorks(){
       //access
         Restaurant wendys = new Restaurant("Wendy's",5, 3 );
-        String restaurantName = "I am a restaurant and this is my name: Wendy's";
+        String restaurantName = "Restaurant{" +
+                "name='" + "Wendy's" + '\'' +
+                ", stars=" + "5" +
+                ", dollarSigns=" + "3" +
+                '}';
         // act
-        String actualOutput = wendys.nameOfRestaurant();
+        String actualOutput = wendys.toString();
         // assert
         assertEquals(restaurantName, actualOutput);
     }
 
     @Test void reviewStringIsAccurate(){
         //access
-        Review david = new Review("wendy's", 3, "David", "This Restaurant is the shit", 5 );
-        String review1 = "Restaurant name: wendy's, Average stars: 5, Average Cost: 3, Author: David, Rating: 5, Review: This Restaurant is the shit";
+        Review david = new Review( "David",  "This Restaurant is the shit", 5 );
+        String review1 = "Review{" +
+                "body='This Restaurant is the shit" + '\'' +
+                ", author='" + "David" + '\'' +
+                ", stars=" + "5" +
+                '}';
         //act
-        String actualOutput = david.reviewOfRestaurant();
+        String actualOutput = david.toString();
         //assert
         assertEquals(actualOutput, review1);
 
+    }
+
+    @Test void shopStringIsAccurate(){
+        //access
+        Shop dollarTree = new Shop("Dollar Tree","Buy some stuff!", 1);
+        String shop = "Shop " +
+                "dollarSigns = " + "1" +
+                ", name = " + "Dollar Tree" + '\'' +
+                ", description = " + "Buy some stuff!" + '\'';
+        // act
+        String actualOutput = dollarTree.toString();
+
+        // assert
+     assertEquals(actualOutput,shop);
     }
 
 }

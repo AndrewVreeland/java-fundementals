@@ -1,28 +1,46 @@
 package inheritance;
 
-public class Review extends Restaurant {
+import java.util.ArrayList;
+
+public class Review  {
     // properties
     protected String body;
     protected String author;
     protected int stars;
 
+    protected ArrayList<Review> reviews;
+
     // constructor
 
-
-    public Review(String name, int dollarSigns, String author, String body, int stars) {
-        super(name, stars, dollarSigns);
+    public Review(String author, String body, int stars) {
         this.author = author;
         this.body = body;
         this.stars = stars;
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "body='" + body + '\'' +
+                ", author='" + author + '\'' +
+                ", stars=" + stars +
+                '}';
+    }
+
     // methods
 
-    public String reviewOfRestaurant(){
-        return("Restaurant name: "+ this.name + ", Average stars: " + this.stars + ", Average Cost: " + this.dollarSigns +  ", Author: " + this.author + ", Rating: " + this.stars + ", Review: " + this.body);
 
-    }
+
+
     // getter and setter
 
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public String getAuthor() {
         return author;
