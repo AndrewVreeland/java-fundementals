@@ -1,8 +1,6 @@
-Feature Task 1:
-Restaraunt class that allows the creation of restraunts through it's constructor.
+App Structure
 
-Festure Task 2: 
-Review class that allows the creation of reviews through its constructor
-
-Feature Task 3: 
-Review class that extends the restaraunt class and takes on its functionality. 
+the Restaruant shop and theater extends the establishment
+the establishment holds similar code for those three Classes.
+you are able to review the establishments 
+and the test file has the tests for the stars functionality as well as the functionality for the seperate String methods.

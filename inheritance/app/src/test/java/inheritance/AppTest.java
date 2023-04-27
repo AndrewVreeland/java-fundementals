@@ -18,19 +18,43 @@ class AppTest {
         Restaurant wendys = new Restaurant("Wendy's",5, 3 );
         String restaurantName = "Restaurant{" +
                 "name='" + "Wendy's" + '\'' +
-                ", stars=" + "5" +
+                ", stars=" + "5.0" +
                 ", dollarSigns=" + "3" +
                 '}';
         // act
         String actualOutput = wendys.toString();
         // assert
         assertEquals(restaurantName, actualOutput);
+        assertEquals("Wendy's", wendys.getName());
+        assertEquals(5.0, wendys.getStars() );
+        assertEquals(0, wendys.getReviews().size());
+    }
+    @Test void restaurantUpdateStarsTest(){
+        // test that the star rating properly when reviews are added.
+        // arrange
+            // create a restaurant from scratch
+        Restaurant sut = new Restaurant("Wendy's",5, 3);
+            // create 3 reviews with varying star ratings
+        Review reviewOne = new Review("Dave", "good", 5);
+        Review reviewTwo = new Review("Alex", "eh", 3);
+        Review reviewThree = new Review("Alex", "good enough", 4);
+            // create variable to hold the expected average star count
+        double expectedStars = 4.0;
+        // act
+            // add each of the reviews to my restaurant
+            // update the star rating after adding the review
+        sut.addReview(reviewOne);
+        sut.addReview(reviewTwo);
+        sut.addReview(reviewThree);
+        // assert
+            // that the rating is the actual average of the stars
+        assertEquals(expectedStars, sut.getStars());
     }
 
     @Test void reviewStringIsAccurate(){
         //access
         Review david = new Review( "David",  "This Restaurant is the shit", 5 );
-        String review1 = "Review{" +
+        String review = "Review{" +
                 "body='This Restaurant is the shit" + '\'' +
                 ", author='" + "David" + '\'' +
                 ", stars=" + "5" +
@@ -38,7 +62,7 @@ class AppTest {
         //act
         String actualOutput = david.toString();
         //assert
-        assertEquals(actualOutput, review1);
+        assertEquals(actualOutput, review);
 
     }
 

@@ -6,13 +6,13 @@ public class Review  {
     // properties
     protected String body;
     protected String author;
-    protected float stars;
+    protected int stars;
 
     protected ArrayList<Review> reviews;
 
     // constructor
 
-    public Review(String author, String body, float stars) {
+    public Review(String author, String body, int stars) {
         this.author = author;
         this.body = body;
         this.stars = stars;
@@ -58,11 +58,11 @@ public class Review  {
         this.body = body;
     }
 
-    public float getStars() {
+    public int getStars() {
         return stars;
     }
 
-    public void setStars(float stars){
+    public void setStars(int stars){
         if (stars >= 0 && stars <= 5){
             this.stars = stars;
         }else{

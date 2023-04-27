@@ -7,7 +7,7 @@ public class Restaurant extends Establishment {
     // constructor
 
 
-    public Restaurant(String name, float stars, int dollarSigns) {
+    public Restaurant(String name, int stars, int dollarSigns) {
         this.name = name;
         setStars(stars);
         this.reviews = new ArrayList<>();
@@ -15,10 +15,19 @@ public class Restaurant extends Establishment {
     }
     // methods
     // not sure how to test this
-    public void addReview(String author, String body, float stars){
-        Review newReview = new Review(author, body, stars);
-        reviews.add(newReview);
+    public void addReview(Review review){
+        reviews.add(review);
+        updateStars();
     }
+
+    private void updateStars(){
+        int totalStars =0;
+        for (Review review : reviews){
+            totalStars += review.getStars();
+        }
+        this.stars =  (float) totalStars / reviews.size();
+    }
+
 
 
 
