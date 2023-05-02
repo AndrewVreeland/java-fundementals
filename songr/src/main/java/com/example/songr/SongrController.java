@@ -16,11 +16,12 @@ public class SongrController {
     public String splashPage() {
         return "/splashPage";
     }
+    
 
     @GetMapping("/capitalize/{newText}")
     public String capitalize(Model model, @PathVariable String newText) {
         model.addAttribute("capitalizedText", newText.toUpperCase());
-        return "/capitalize/${newText}";
+        return "capitalize";
     }
 
 
