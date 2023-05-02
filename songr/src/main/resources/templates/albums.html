@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <title>Albums</title>
+</head>
+<body>
+<h1>My Personal Jams</h1>
+<div class="albumList">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Song Count</th>
+            <th>Length (s)</th>
+            <th>Album Art</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="album : ${albums}">
+            <td th:text="${album.title}"></td>
+            <td th:text="${album.artist}"></td>
+            <td th:text="${album.songCount}"></td>
+            <td th:text="${album.lengthInSeconds}"></td>
+            <td>
+                <img th:src="${album.imageUrl}" alt="Album Art" width="200" height="200"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>>

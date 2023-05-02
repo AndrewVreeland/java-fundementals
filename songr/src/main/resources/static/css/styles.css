@@ -1,0 +1,77 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+html{
+background-color: #000000;
+}
+
+h1 {
+    color: lightblue;
+    text-align: center;
+    padding: 25px ;
+}
+
+/* Navigation pane */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #013220;
+    padding: 10px;
+}
+
+/* Splash page styles */
+.splashContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 44px); /* Adjust for the navbar height */
+    background-color: #e0f2e9;
+}
+
+.splashContainer p {
+    font-size: 18px;
+    color: #013220;
+    text-align: center;
+}
+
+
+/* Albums styles */
+.albumList {
+    width: 80%;
+    margin: 0 auto ;
+    padding: 20px;
+}
+
+.albumList table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+
+}
+
+.albumList th {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    padding: 20px;
+     font-size: 30px;
+}
+
+.albumList td {
+    border: 2px solid lightblue;
+    padding: 10px;
+}
+
+
+.albumList tbody  {
+    background-color: #f0f0f0;
+}
+
+.albumList img {
+    border-radius: 10px;
+}
