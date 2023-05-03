@@ -47,7 +47,7 @@ albumRepository albumRepository;
     }
 
     @PostMapping("/")
-    public RedirectView createAlbum(String title, String artist, int songCount, int lengthInSeconds, String imageUrl){
+    public RedirectView createAlbum(String title, String artist, Integer songCount, Integer lengthInSeconds, String imageUrl){
         Album newAlbum = new Album(title, artist, songCount, lengthInSeconds, imageUrl);
         albumRepository.save(newAlbum);
         return new RedirectView("/");
