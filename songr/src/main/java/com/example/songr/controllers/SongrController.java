@@ -1,12 +1,20 @@
-package com.example.songr;
+package com.example.songr.controllers;
 
+import com.example.songr.models.Album;
+import com.example.songr.repository.albumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class SongrController {
+    //TODO: 6. wire our repository to our controller
+@Autowired
+albumRepository albumRepository;
 
     @GetMapping("/hello")
     public String helloWorld(){
@@ -36,6 +44,13 @@ public class SongrController {
 
         model.addAttribute("albums", albums);
         return "albums";
+    }
+
+    @PostMapping("/")
+    public RedirectView createAlbum(String title, String artist, int songCount, int lengthInSeconds, String imageUrl){
+        Album newAlbum = new Album(title, artist, songCount, lengthInSeconds, imageUrl);
+        albumRepository.save(newAlbum);
+        return new RedirectView("/");
     }
 
 }

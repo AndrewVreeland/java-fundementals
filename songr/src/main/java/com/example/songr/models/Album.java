@@ -1,7 +1,17 @@
-package com.example.songr;
+package com.example.songr.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+//TODO: 1. add @Entity annotation to data model
+@Entity
 public class Album {
-
+//TODO: 2. add @Id and @GeneratyedValue annotations
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
     // properties
     private String title;
     private String artist;
@@ -9,7 +19,11 @@ public class Album {
     private int lengthInSeconds;
     private String imageUrl;
 
+
+    //TODO: 3. create protected default constructor
     //constructor
+
+    protected Album() {}
 
     public Album(String title, String artist, int songCount, int lengthInSeconds, String imageUrl) {
         this.title = title;
@@ -18,6 +32,21 @@ public class Album {
         this.lengthInSeconds = lengthInSeconds;
         this.imageUrl = imageUrl;
     }
+
+
+    // methods
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", songCount=" + songCount +
+                ", lengthInSeconds=" + lengthInSeconds +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
+
 
     // getters and setters
 
@@ -61,3 +90,11 @@ public class Album {
         this.imageUrl = imageUrl;
     }
 }
+
+/*
+@Entity
+@Id
+@GeneratedValue
+@Autowired
+
+ */
