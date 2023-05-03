@@ -7,6 +7,24 @@
 <body>
 <h1>My Personal Jams</h1>
 <div class="albumList">
+    <form action = "/album/" method="POST">
+
+        <fieldset>
+            <legend>Add New Albums</legend>
+            <label>Album Name</label>
+            <input type="text" name="title">
+            <label>Artist Name</label>
+            <input type="text" name="artist">
+            <label>Total Song Count</label>
+            <input type="text" name="songCount">
+            <label>Total Album Length In Seconds</label>
+            <input type="text" name="lengthInSeconds">
+            <label>Album Art URL</label>
+            <input type="text" name="imageUrl">
+            <input type="submit" value="Add Album">
+        </fieldset>
+
+    </form>
     <table>
         <thead>
         <tr>
