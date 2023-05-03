@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @Controller
 public class SongrController {
     //TODO: 6. wire our repository to our controller
@@ -36,11 +38,13 @@ albumRepository albumRepository;
 
     @GetMapping("/albums")
     public String albums(Model model) {
-        Album[] albums = {
-                new Album("Faces", "Scary Kids Scaring Kids", 13, 1499, "/images/640x640.jpg"),
-                new Album("Home Sick", "A Day To Remember", 11, 1534, "/images/aDayToRemember.jpg"),
-                new Album("WE ARE TRIUMPHANT COUNT YOUR BLESSINGS.", "Bring Me The Horizon", 10, 1800, "/images/countYourBlessings.jpg")
-        };
+        List<Album> albums = albumRepository.findAll();
+
+//        Album[] albums = {
+//                new Album("Faces", "Scary Kids Scaring Kids", 13, 1499, "/images/640x640.jpg"),
+//                new Album("Home Sick", "A Day To Remember", 11, 1534, "/images/aDayToRemember.jpg"),
+//                new Album("WE ARE TRIUMPHANT COUNT YOUR BLESSINGS.", "Bring Me The Horizon", 10, 1800, "/images/countYourBlessings.jpg")
+//        };
 
         model.addAttribute("albums", albums);
         return "albums";
