@@ -1,7 +1,7 @@
 package com.example.songr.controllers;
 
 import com.example.songr.models.Album;
-import com.example.songr.repository.albumRepository;
+import com.example.songr.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.List;
 public class SongrController {
     //TODO: 6. wire our repository to our controller
 @Autowired
-albumRepository albumRepository;
+    AlbumRepository albumRepository;
 
     @GetMapping("/hello")
     public String helloWorld(){
@@ -39,13 +39,6 @@ albumRepository albumRepository;
     @GetMapping("/albums")
     public String albums(Model model) {
         List<Album> albums = albumRepository.findAll();
-
-//        Album[] albums = {
-//                new Album("Faces", "Scary Kids Scaring Kids", 13, 1499, "/images/640x640.jpg"),
-//                new Album("Home Sick", "A Day To Remember", 11, 1534, "/images/aDayToRemember.jpg"),
-//                new Album("WE ARE TRIUMPHANT COUNT YOUR BLESSINGS.", "Bring Me The Horizon", 10, 1800, "/images/countYourBlessings.jpg")
-//        };
-
         model.addAttribute("albums", albums);
         return "albums";
     }
