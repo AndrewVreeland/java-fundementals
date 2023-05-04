@@ -1,14 +1,14 @@
 package com.example.songr.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //TODO: 1. add @Entity annotation to data model
 @Entity
 public class Album {
-//TODO: 2. add @Id and @GeneratyedValue annotations
+//TODO: 2. add @Id and @GeneratedValue annotations
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -16,9 +16,13 @@ public class Album {
     private String title;
     private String artist;
     private int songCount;
+    private int length;
     private int lengthInSeconds;
+
     private String imageUrl;
 
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    List<Song> songs;
 
     //TODO: 3. create protected default constructor
     //constructor
@@ -32,9 +36,34 @@ public class Album {
         this.lengthInSeconds = lengthInSeconds;
         this.imageUrl = imageUrl;
     }
+    public Album(long id, String title, String artist, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.imageUrl = imageUrl;
+        this.songs = new ArrayList<>();
+        this.songCount = this.songs.size();
+        calculateAlbumLength();
+    }
 
+    public Album(String title, String artist, String imageUrl) {
+        this.title = title;
+        this.artist = artist;
+        this.imageUrl = imageUrl;
+        this.songs = new ArrayList<>();
+        this.songCount = this.songs.size();
+        calculateAlbumLength();
+    }
 
     // methods
+    public void calculateAlbumLength() {
+        int total = 0;
+        for(Song track : this.songs) {
+            total += track.length;
+        }
+        this.length = total;
+    }
+
 
     @Override
     public String toString() {
@@ -49,6 +78,14 @@ public class Album {
 
 
     // getters and setters
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
 
     public String getTitle() {
         return title;
@@ -81,6 +118,12 @@ public class Album {
     public void setLengthInSeconds(int lengthInSeconds) {
         this.lengthInSeconds = lengthInSeconds;
     }
+    public void addSong(Song song) {
+        song.setAlbum(this);
+        songs.add(song);
+        this.songCount = this.songs.size();
+    }
+
 
     public String getImageUrl() {
         return imageUrl;
@@ -89,6 +132,8 @@ public class Album {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+
 }
 
 /*
