@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Welcome to my home page</h1>
+<h3 th:text="${message}"></h3>
+<form action = "/login" method="POST">
+
+    <fieldset>
+        <legend>Login</legend>
+        <label>username</label>
+        <input type = "text" name="userName">
+        <label>password</label>
+        <input type = "password" name="password">
+        <input type = "submit" value="login">
+    </fieldset>
+
+</form>
+
+<form action="/signup" method="POST">
+
+    <fieldset>
+
+        <legend>Signup</legend>
+        <label>username</label>
+        <input type = "text" name="username">
+        <label>password</label>
+        <input type = "password" name="password">
+        <input type = "submit" value="signup">
+
+    </fieldset>
+
+</form>
+
+</body>
+</html>
