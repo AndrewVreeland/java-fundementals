@@ -62,12 +62,12 @@ m.addAttribute("username", username);
 
 
         siteUserRepo.save(newUser);
-        authWithHttpServletRequest(username, password);
+        authWithHttpServletRequest(username, password, firstName,lastName,dateOfBirth, bio);
 
 return new RedirectView("/");
     }
 
-    public void authWithHttpServletRequest(String username, String password){
+    public void authWithHttpServletRequest(String username, String password, String firstName, String lastName, String dateOfBirth, String bio){
         try{
             request.login(username, password);
         }catch (ServletException e){
