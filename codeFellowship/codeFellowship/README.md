@@ -7,6 +7,4 @@ If users aren't logged in, they can see links to log in or create an account.
 If users are logged in, they can see a link to log out.
 When users create an account, they're automatically logged in.
 
-The two feature tasks giving me issues are the CSS and user data coming in as null. 
-the data shows properly within SQL and the data is formatted the same as the username, so I am not sure where the disconnect is.
-12334123
+The  feature task giving me an issue is the CSS file not being read. (I unhooked it and reworked my html since so the value dont match now)
