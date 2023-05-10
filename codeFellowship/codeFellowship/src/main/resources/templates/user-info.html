@@ -10,14 +10,16 @@
 <h1 th:text="${'user info for user id: ' + profileId}"></h1>
 
 
-<form th:action="`/user/` + profileId" th:method="PUT">
-<label for="profileUsername">Username</label>
-<input th:value="${profileUsername}" type="text" name="profileUsername" id="profileUsername" th:disabled="${!username.equal(profileUsername)}">
+<form th:action="'/user/' + profileId" th:method="PUT">
+<label for="profilename">Username</label>
+<input th:value="${profilename}" type="text" name="profilename" id="profilename" th:disabled="${!username.equals(profilename)}">
     <input type="submit" value="edit user info">
 </form>
+
 <label for="profileId">ProfileId</label>
 <div th:text="${profileId}" type="text" name="profileId" id="profileId"></div>
 <label for="profileDateCreated">Date Created</label>
-<div th:text="${#temporals.format(profileDateCreated), 'MM-dd-yyyy'}" type="text" name="profileDateCreated" id="profileDateCreated"></div>
+<div th:text="${#temporals.format(profileDateCreated, 'MM-dd-yyyy')}" type="text" name="profileDateCreated" id="profileDateCreated"></div>
 </body>
 </html>
+

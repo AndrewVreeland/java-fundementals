@@ -5,12 +5,15 @@ import com.example.codeFellowship.repos.SiteUserRepo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -32,8 +35,13 @@ public class SiteUserController {
         if (p != null) {
             String username = p.getName();
 
+
+
             SiteUser user = siteUserRepo.findByUsername(username);
-m.addAttribute("username", username);
+
+            String firstName = user.getFirstName();
+            m.addAttribute("username", username);
+            m.addAttribute("firstName", firstName);
      }
 
         return "index.html";
@@ -106,4 +114,21 @@ return new RedirectView("/");
 
         return"user-info.html";
     }
+
+    @PutMapping("/user/{id}")
+    public RedirectView updateUserInfo(Model m, Principal p, @PathVariable long id, String profileUsername){
+        SiteUser userToBeEdited = siteUserRepo.findById(id).orElseThrow();
+        if(p != null && p.getName().equals(userToBeEdited.getUsername())){
+            userToBeEdited.setUsername(profileUsername);
+            siteUserRepo.save(userToBeEdited);
+
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userToBeEdited, userToBeEdited.getPassword(),
+            userToBeEdited.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        return new RedirectView("/user/"+id);
+
+    }
+
 }
