@@ -27,10 +27,14 @@ LocalDate dateCreated;
 
 public SiteUser(){} // default constructor
 
-    public SiteUser(String username, String password, LocalDate dateCreated) {
+    public SiteUser(String username, String password, LocalDate dateCreated, String firstName, String lastName, String bio, String dateOfBirth) {
         this.username = username;
         this.password = password;
         this.dateCreated = dateCreated;
+        this.bio = bio;
+        this.dateOfBirth = dateOfBirth;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
@@ -121,4 +125,6 @@ public SiteUser(){} // default constructor
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
 }

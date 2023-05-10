@@ -9,10 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
 import java.security.Principal;
+import java.time.LocalDate;
 
 // TODO: 2: CheatSheet 2: Create a user controller
 @Controller
@@ -30,10 +31,10 @@ public class SiteUserController {
     public String getHomePage(Model m, Principal p){
         if (p != null) {
             String username = p.getName();
+
             SiteUser user = siteUserRepo.findByUsername(username);
 m.addAttribute("username", username);
-        }
-
+     }
 
         return "index.html";
     }
@@ -59,15 +60,16 @@ m.addAttribute("username", username);
         newUser.setDateOfBirth(dateOfBirth);
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setPassword(encryptedPassword);
+        newUser.setDateCreated(LocalDate.now());
 
 
         siteUserRepo.save(newUser);
-        authWithHttpServletRequest(username, password, firstName,lastName,dateOfBirth, bio);
+        authWithHttpServletRequest(username, password);
 
 return new RedirectView("/");
     }
 
-    public void authWithHttpServletRequest(String username, String password, String firstName, String lastName, String dateOfBirth, String bio){
+    public void authWithHttpServletRequest(String username, String password){
         try{
             request.login(username, password);
         }catch (ServletException e){
@@ -75,5 +77,33 @@ return new RedirectView("/");
             e.printStackTrace();
         }
     }
+    @GetMapping("/test")
+    public String getTestPage(Model m, Principal p) {
+        if(p != null) {
+            String username = p.getName();
+            SiteUser user = siteUserRepo.findByUsername(username);
 
+            if(user != null) {
+                m.addAttribute("username", user.getUsername());
+            }
+        }
+
+        return "test.html";
+    }
+
+    @GetMapping("/user/{id}")
+    public String getUserInfoPage(Model m, Principal p, @PathVariable long id){
+        if(p != null){
+            String username = p.getName();
+            SiteUser browsingUser = siteUserRepo.findByUsername(username);
+            m.addAttribute("username", browsingUser.getUsername());
+        }
+
+        SiteUser profileUser = siteUserRepo.findById(id).orElseThrow();
+        m.addAttribute("profilename", profileUser.getUsername());
+        m.addAttribute("profileId", profileUser.getId());
+        m.addAttribute("profileDateCreated", profileUser.getDateCreated());
+
+        return"user-info.html";
+    }
 }
