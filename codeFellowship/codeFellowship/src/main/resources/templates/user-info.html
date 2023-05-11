@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <h3 th:if="${username} != null" th:text="${'Current browsing user: ' + username}"></h3>
-
+<div th:replace="/fragments/error-fragment :: siteuser-error"></div>
 <h1 th:text="${'user info for user id: ' + profileId}"></h1>
 
 
-<form th:action="'/user/' + profileId" th:method="PUT">
+<form th:action="${'/user/' + profileId}" th:method="PUT">
 <label for="profilename">Username</label>
 <input th:value="${profilename}" type="text" name="profilename" id="profilename" th:disabled="${!username.equals(profilename)}">
-    <input type="submit" value="edit user info">
+    <input th:if="${username.equals(profilename)}" type="submit" value="edit user info">
 </form>
 
 <label for="profileId">ProfileId</label>
