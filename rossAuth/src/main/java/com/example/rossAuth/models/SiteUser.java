@@ -1,2 +1,6 @@
-package com.example.rossAuth.models;public class SiteUser {
+package com.example.rossAuth.models;
+
+import jakarta.persistence.Entity;
+
+public class SiteUser {
 }

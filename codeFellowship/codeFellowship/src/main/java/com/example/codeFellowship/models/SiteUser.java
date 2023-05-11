@@ -1,12 +1,15 @@
 package com.example.codeFellowship.models;
 
 import jakarta.persistence.*;
+import org.hibernate.usertype.UserType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //TODO: step 1A: CheatSheet 1: Create a site user(not named "user")
 //TODO: Step 4C: CHEATSHEET 3: implement udersetails and its methods to help get the user details for spring security
@@ -38,7 +41,37 @@ public class SiteUser implements UserDetails {
         this.bio = bio;
     }
 
-    // UserDetails Overrides
+    @ManyToMany
+    @JoinTable(
+           name="followers_to_followees",
+            joinColumns = {@JoinColumn(name="userWhoIsFollowing")},
+            inverseJoinColumns = {@JoinColumn(name ="Followed_user")}
+    )
+    private Set<SiteUser> usersIFollow = new HashSet<>();
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    private Set<SiteUser> usersWhoFollowMe = new HashSet<>();
+
+
+
+    // getters and setters
+
+    public Set<SiteUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public void setUsersIFollow(Set<SiteUser> usersIFollow) {
+        this.usersIFollow = usersIFollow;
+    }
+
+    public Set<SiteUser> getUsersWhoFollowMe() {
+        return usersWhoFollowMe;
+    }
+
+    public void setUsersWhoFollowMe(Set<SiteUser> usersToFollowMe) {
+        this.usersWhoFollowMe = usersToFollowMe;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -136,4 +169,6 @@ public class SiteUser implements UserDetails {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+
 }

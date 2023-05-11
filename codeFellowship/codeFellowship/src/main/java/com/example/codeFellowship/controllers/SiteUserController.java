@@ -3,6 +3,8 @@ import com.example.codeFellowship.repos.PostRepo;
 import com.example.codeFellowship.models.Post;
 import com.example.codeFellowship.models.SiteUser;
 import com.example.codeFellowship.repos.SiteUserRepo;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.catalina.Store;
@@ -147,6 +149,12 @@ public class SiteUserController {
         if(p != null) {
             SiteUser user = siteUserRepo.findById(id).orElseThrow();
             m.addAttribute("user", user);
+
+            SiteUser viewUser = siteUserRepo.findById(id).orElseThrow();
+
+            m.addAttribute("viewUser", viewUser);
+            m.addAttribute("usersIFollow", viewUser.getUsersIFollow());
+            m.addAttribute("usersWhoFollowMe", viewUser.getUsersWhoFollowMe());
             return "profile";
         } else {
             redir.addFlashAttribute("errorMessage", "You must be logged in to view this profile!");
@@ -154,4 +162,17 @@ public class SiteUserController {
         }
     }
 
+    @PutMapping("follow-user/{id}")
+    public RedirectView followUser(Principal p, @PathVariable Long id){
+        SiteUser userTofollow = siteUserRepo.findById(id).orElseThrow(()-> new RuntimeException("Error reading user from database with id of: " + id));
+        SiteUser currentAuthUser = siteUserRepo.findByUsername(p.getName());
+        if(currentAuthUser.getUsername().equals(userTofollow.getUsername())){
+            throw new IllegalArgumentException("you cannot follow yourself!");
+        }
+        currentAuthUser.getUsersIFollow().add(userTofollow);
+        siteUserRepo.save(currentAuthUser);
+
+        return new RedirectView("/user/" +id);
+
+    }
 }
