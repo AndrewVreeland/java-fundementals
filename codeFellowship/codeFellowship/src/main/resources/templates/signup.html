@@ -1,38 +1,38 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
+
 </head>
 <body>
-<form action="/signup" method="POST">
-    <label>Username</label>
-    <input type="text" name="username">
+<header>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</header>
+<div th:replace="/fragments/error :: applicationUser-error"></div>
+<h1>Sign up!</h1>
+<form method="post" action="/signup">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required>
 
-    <br>
-    <label>Password</label>
-    <input type="text" name="password">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required>
 
-    <br>
-    <label>First Name</label>
-    <input type="text" name="firstName">
+    <label for="firstName">First Name</label>
+    <input id="firstName" name="firstName" type="text" required>
 
-    <br>
-    <label>Last Name</label>
-    <input type="text" name="lastName">
+    <label for="lastName">Last Name</label>
+    <input id="lastName" name="lastName" type="text" required>
 
-    <br>
-    <label>Date Of Birth</label>
-    <input type="text" name="dateOfBirth">
+    <label for="dateOfBirth">Date of Birth</label>
+    <input id="dateOfBirth" name="dateOfBirth" type="date" required>
 
-    <br>
-    <label>Bio</label>
-    <input type="text" name="bio">
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" required></textarea>
 
-    <input type="submit" value="Sign Up">
+    <input type="submit" value="Sign up">
 </form>
 </body>
 </html>
